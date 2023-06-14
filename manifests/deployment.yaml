@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fwtTest123
+  labels:
+    app: fwtTest123
+  namespace: namespace-workflow-1686769843637
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fwtTest123
+  template:
+    metadata:
+      labels:
+        app: fwtTest123
+    spec:
+      containers:
+        - name: fwtTest123
+          image: acrworkflow1686769843637.azurecr.io/image-workflow-1686769843637:latest
+          ports:
+            - containerPort: 5000
