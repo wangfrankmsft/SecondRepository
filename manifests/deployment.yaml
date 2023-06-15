@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fwtTest123
+  name: dsd
   labels:
-    app: fwtTest123
-  namespace: namespace-workflow-1686769843637
+    app: dsd
+  namespace: namespace-workflow-1686857254172
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fwtTest123
+      app: dsd
   template:
     metadata:
       labels:
-        app: fwtTest123
+        app: dsd
     spec:
       containers:
-        - name: fwtTest123
-          image: acrworkflow1686769843637.azurecr.io/image-workflow-1686769843637:latest
+        - name: dsd
+          image: acrworkflow1686857254172.azurecr.io/image-workflow-1686857254172:latest
           ports:
-            - containerPort: 5000
+            - containerPort: 3000
