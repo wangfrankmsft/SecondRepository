@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fwtTest123
+  name: abcde
   labels:
-    app: fwtTest123
-  namespace: namespace-workflow-1686769843637
+    app: abcde
+  namespace: namespace-workflow-1686853170094
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fwtTest123
+      app: abcde
   template:
     metadata:
       labels:
-        app: fwtTest123
+        app: abcde
     spec:
       containers:
-        - name: fwtTest123
-          image: acrworkflow1686769843637.azurecr.io/image-workflow-1686769843637:latest
+        - name: abcde
+          image: acrworkflow1686769843637.azurecr.io/image-workflow-1686853170094:latest
           ports:
-            - containerPort: 5000
+            - containerPort: 45003
