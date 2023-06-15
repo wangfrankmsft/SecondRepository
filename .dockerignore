@@ -1,5 +1,4 @@
 Dockerfile
 charts/
-resources/
-target/
-test/
+bin/
+obj/
