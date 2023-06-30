@@ -1,13 +1,21 @@
-FROM clojure as BUILD
-COPY . /usr/src/app
-WORKDIR /usr/src/app
-RUN lein ring uberjar
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS builder
+WORKDIR /app
 
-FROM eclipse-temurin:8-jdk-alpine
+# caches restore result by copying csproj file separately
+COPY *.csproj .
+RUN dotnet restore
 
-RUN apk update && apk upgrade && apk add bash
-ENV PORT 3000
-EXPOSE 3000
-COPY --from=BUILD /usr/src/app/target/*.jar /opt/
-WORKDIR /opt
-CMD ["/bin/bash", "-c", "find -type f -name '*standalone.jar' | xargs java -jar"]
+COPY . .
+RUN dotnet publish --output /app/ --configuration Release --no-restore
+RUN sed -n 's:.*<AssemblyName>\(.*\)</AssemblyName>.*:\1:p' *.csproj > __assemblyname
+RUN if [ ! -s __assemblyname ]; then filename=$(ls *.csproj); echo ${filename%.*} > __assemblyname; fi
+
+# Stage 2
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=builder /app .
+
+ENV PORT 5000
+EXPOSE 5000
+
+ENTRYPOINT dotnet $(cat /app/__assemblyname).dll --urls "http://*:5000"

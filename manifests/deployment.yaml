@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fwTest1233
+  name: adssa
   labels:
-    app: fwTest1233
-  namespace: namespace-workflow-1686851112911
+    app: adssa
+  namespace: namespace-workflow-1688157232911
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fwTest1233
+      app: adssa
   template:
     metadata:
       labels:
-        app: fwTest1233
+        app: adssa
     spec:
       containers:
-        - name: fwTest1233
-          image: acrworkflow1686851112911.azurecr.io/image-workflow-1686851112911:latest
+        - name: adssa
+          image: acrworkflow1688157232911.azurecr.io/image-workflow-1688157232911:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 5000
