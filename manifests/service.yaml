@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fwTest1233
-  namespace: namespace-workflow-1686851112911
+  name: adssa
+  namespace: namespace-workflow-1688157232911
 spec:
   type: LoadBalancer
   selector:
-    app: fwTest1233
+    app: adssa
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 5000
+      targetPort: 5000
